@@ -1,4 +1,7 @@
 body {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     height: 720px;
     width: 1280px;
     font-family: Arial;
@@ -32,19 +35,22 @@ div#body {
 div#home {
     position: absolute;
     top: 0px;
+    width: 1280px;
 }
 
-div#home_verticalMenu {
+div.vertical_menu {
     position: absolute;
     top: 270px;
     left: 120px;
-    border: 1px solid crimson;
+    /*border: 1px solid crimson;*/
+    -webkit-transition: top ease-out 800ms;
 }
 
 div.vertical_menu_item {
     height: 70px;
     font-size: 35px;
-    border: 1px solid yellow;
+    /*border: 1px solid yellow;*/
+    -webkit-transition: height ease-in 500ms;
 }
 
 div.vertical_menu_item.selected {
@@ -86,4 +92,40 @@ div.fullscreen {
 #header1 {
     position: absolute;
     top: 200px;
+}
+
+.poster-card {
+    display: inline-block;
+    height: 112px;
+    width: 175px;
+    border: 1px solid red;
+    margin: 10px;
+    /*box-sizing: content-box;*/
+}
+
+.horizontal_menu {
+    position: absolute;
+    top: 320px;
+    left: 20px;
+    height: 135px;
+    /*overflow: hidden;*/
+    border: 1px solid yellow;
+}
+
+img.poster-logo {
+    position: absolute;
+    top: 10px;
+    height: 112px;
+    width: 175px;
+    border: 1px dashed green;
+    background: cyan;
+}
+
+.poster-title {
+    position: absolute;
+    bottom: 17px;
+    z-index: 1;
+    background: red;
+    width: 175px;
+    font-size: 30px;
 }

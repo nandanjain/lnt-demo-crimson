@@ -2,30 +2,36 @@
  * Created by nanjain on 3/31/17.
  */
 CRIMSON.HorizontalMenu = function (parent) {
-    var POSTER_WIDTH = 100;
-    var POSTER_HEIGHT = 100;
+    var POSTER_WIDTH = 192;
+    var POSTER_HEIGHT = 112;
 
     var CURRENT_INDEX = 0;
     var TOTAL_SIZE = 0;
 
+    var computedStyle = getComputedStyle(parent, null);
+    var baseLeft = parseInt(computedStyle.left);
+
     this.setData = function (data) {
         for (var i = 0; i < data.length; i++) {
             var posterData = data[i];
-            parent.appendChild(new PosterCard(posterData).getContainerEle());
+            var posterContainer = new PosterCard(posterData).getContainerEle();
+            posterContainer.style.left = i * POSTER_WIDTH;
+            parent.appendChild(posterContainer);
             TOTAL_SIZE++;
         }
+        parent.style.width = (TOTAL_SIZE + 2) * POSTER_WIDTH + "px";
     };
 
     this.moveLeft = function () {
         if (CURRENT_INDEX == 0) return;
         CURRENT_INDEX--;
-        parent.style.left = (CURRENT_INDEX * POSTER_WIDTH) + "px";
+        parent.style.left = (baseLeft - CURRENT_INDEX * POSTER_WIDTH) + "px";
     };
 
     this.moveRight = function () {
         if (CURRENT_INDEX == TOTAL_SIZE) return;
         CURRENT_INDEX++;
-        parent.style.left = (CURRENT_INDEX * POSTER_WIDTH) + "px";
+        parent.style.left = (baseLeft - CURRENT_INDEX * POSTER_WIDTH) + "px";
     };
 
     this.moveUp = function () {
