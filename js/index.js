@@ -11,13 +11,22 @@ CRIMSON.KEYS = {
 };
 
 CRIMSON.initialize = function () {
+    var CURRENT_ITEM = 2;
+
     var homeParent = document.getElementById("home");
     var homeVerticalMenuParent = homeParent.getElementsByClassName("vertical_menu")[0];
     var homeVerticalMenu = new CRIMSON.VerticalMenu(homeVerticalMenuParent);
 
+    var horizontalMenuArray = [];
     var homeHorizontalMenuParent = homeParent.getElementsByClassName("horizontal_menu")[0];
-    var homeHorizontalMenu = new CRIMSON.HorizontalMenu(homeHorizontalMenuParent);
-    homeHorizontalMenu.setData(horizontalData[0]);
+    var homeHorizontalMenuItemParent = homeHorizontalMenuParent.getElementsByClassName("horizontal_menu_item");
+    for (var i = 0; i < 5; i++) {
+        var homeHorizontalMenu = new CRIMSON.HorizontalMenu(homeHorizontalMenuItemParent[i]);
+        homeHorizontalMenu.setData(horizontalData[i]);
+        horizontalMenuArray.push(homeHorizontalMenu);
+    }
+
+    horizontalMenuArray[CURRENT_ITEM].show();
 
     document.onkeydown = function (event) {
         event.preventDefault();
@@ -25,21 +34,34 @@ CRIMSON.initialize = function () {
         switch (event.keyCode) {
             case CRIMSON.KEYS.LEFT:
                 // Left
-                homeHorizontalMenu.moveLeft();
+                horizontalMenuArray[CURRENT_ITEM].moveLeft();
                 break;
             case CRIMSON.KEYS.UP:
                 // UP
+                if (CURRENT_ITEM == 0) {
+                    return;
+                }
+                horizontalMenuArray[CURRENT_ITEM].moveUp();
+//                horizontalMenuArray[CURRENT_ITEM].hide();
+                CURRENT_ITEM--;
                 homeVerticalMenu.moveDown();
-//                homeHorizontalMenu.moveDown();
+                horizontalMenuArray[CURRENT_ITEM].show();
                 break;
             case CRIMSON.KEYS.RIGHT:
                 // Right
-                homeHorizontalMenu.moveRight();
+                horizontalMenuArray[CURRENT_ITEM].moveRight();
                 break;
             case CRIMSON.KEYS.DOWN:
                 // Down
+                if (CURRENT_ITEM == horizontalMenuArray.length - 1) {
+                    return;
+                }
+                horizontalMenuArray[CURRENT_ITEM].moveDown();
+//                horizontalMenuArray[CURRENT_ITEM].hide();
+                CURRENT_ITEM++;
                 homeVerticalMenu.moveUp();
-//                homeHorizontalMenu.moveUp();
+//                horizontalMenuArray[CURRENT_ITEM].moveDown();
+                horizontalMenuArray[CURRENT_ITEM].show();
                 break;
         }
     }

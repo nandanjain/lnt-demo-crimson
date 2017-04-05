@@ -43,7 +43,7 @@ div.vertical_menu {
     top: 270px;
     left: 120px;
     /*border: 1px solid crimson;*/
-    -webkit-transition: top ease-out 800ms;
+    -webkit-transition: top ease-in 800ms;
 }
 
 div.vertical_menu_item {
@@ -61,32 +61,26 @@ div.vertical_menu_item.selected {
 
 div.fullscreen {
     height: 100%;
-    border: 1px solid blue;
-    width: 500px;
     z-index: 10 !important;
     position: absolute;
     top: 0px;
     left: 0px;
+    /*border: 1px solid blue;*/
 }
 
 .item_0 {
-
 }
 
 .item_1 {
-
 }
 
 .item_2 {
-
 }
 
 .item_3 {
-
 }
 
 .item_4 {
-
 }
 
 #header1 {
@@ -98,9 +92,8 @@ div.fullscreen {
     display: inline-block;
     height: 112px;
     width: 175px;
-    border: 1px solid red;
     margin: 10px;
-    /*box-sizing: content-box;*/
+    /*border: 1px solid red;*/
 }
 
 .horizontal_menu {
@@ -108,8 +101,20 @@ div.fullscreen {
     top: 320px;
     left: 20px;
     height: 135px;
-    /*overflow: hidden;*/
-    border: 1px solid yellow;
+    /*border: 1px solid yellow;*/
+}
+
+.horizontal_menu_item {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /*visibility: hidden;*/
+    opacity: 0;
+    -webkit-transition: left ease-in-out 500ms, top ease-out 500ms, opacity linear 510ms;
+}
+
+.horizontal_menu_item.selected {
+    /*-webkit-transition: none;*/
 }
 
 img.poster-logo {
@@ -117,8 +122,7 @@ img.poster-logo {
     top: 10px;
     height: 112px;
     width: 175px;
-    border: 1px dashed green;
-    background: cyan;
+    /*border: 1px dashed green;*/
 }
 
 .poster-title {

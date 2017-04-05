@@ -4,7 +4,6 @@
     <script type="text/javascript">
         var CRIMSON = {};
         function initialize() {
-//            alert("init");
             CRIMSON.initialize();
         }
     </script>
@@ -19,15 +18,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="initialize()">
-<!--<video autoplay="" height="100%" width="100%" style="z-index: 0">-->
-<!--<source src="resources/BuckBunny.mp4" type="video/mp4">-->
-<!--</video>-->
+<video autoplay="" height="100%" width="100%" style="z-index: 0">
+    <source src="resources/BuckBunny.mp4" type="video/mp4">
+</video>
 <div id="header" style="position: absolute; top: 100px">
-<div id="clock"></div>
+    <div id="clock"></div>
     <span id="divider"></span>
+
     <div id="title"></div>
 </div>
-<!--<div id="header1"></div>-->
 <div id="body">
     <div id="home" class="fullscreen">
         <div id="home_verticalMenu" class="vertical_menu">
@@ -37,7 +36,13 @@
             <div class="vertical_menu_item item_3">library</div>
             <div class="vertical_menu_item item_4">settings</div>
         </div>
-        <div class="horizontal_menu"></div>
+        <div class="horizontal_menu">
+            <div class="horizontal_menu_item"></div>
+            <div class="horizontal_menu_item"></div>
+            <div class="horizontal_menu_item"></div>
+            <div class="horizontal_menu_item"></div>
+            <div class="horizontal_menu_item"></div>
+        </div>
     </div>
     <div id="channels" class="fullscreen displayNone">
         <div class="vertical_menu">
@@ -51,9 +56,5 @@
     </div>
     <div id="search" class="fullscreen displayNone"></div>
 </div>
-<!--<script type="text/javascript">-->
-<!--alert(document.getElementById("header").style.top);-->
-<!--alert(document.getElementById("header1").style.top);-->
-<!--</script>-->
 </body>
 </html>
