@@ -1,10 +1,22 @@
-<!DOCTYPE html>
+ <!DOCclass html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/widget_horizontallist.js"></script>
-    <script type="text/javascript" src="js/widget_verticalmenu.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" href="mottie.github.com/Keyboard/css/keyboard.css">
+
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script class="text/javascript" src="js/keyboard.js"></script>
+    <script class="text/javascript" src="js/widget_horizontallist.js"></script>
+    <script class="text/javascript" src="js/widget_verticalmenu.js"></script>
+
+    
 </head>
+<!-- <body onload="initialise()"> -->
 <body>
 <div id="header">
     <div id="clock"></div>
@@ -16,7 +28,58 @@
     <div id="home"></div>
     <div id="channels"></div>
     <div id="search"></div>
+
+    <div id="page-wrapper" style="width:800px; margin:0 40px;">
+     <h1>Series Search with AJAX</h1>
+
+    <label for="ajax">Search</label>
+    <input type="text" id="ajax" list="json-datalist" placeholder="search">
+    <datalist id="json-datalist"></datalist>
+    </div>
+        <div id="keyboard">
+        <div>
+         <div class="button selected">a</div>
+         <div class="button">b</div>
+         <div class="button">c</div>
+         <div class="button">d</div>
+         <div class="button">e</div>
+         <div class="button">f</div>
+         <div class="button">g</div>
+         <div class="button">h</div>
+         <div class="button">i</div>
+         <div class="button">j</div>
+         <div class="button">k</div>
+         <div class="button">l</div>
+         <div class="button">m</div>
+         <div class="button">n</div>
+         <div class="button">o</div>
+         <div class="button">p</div>
+         <div class="button">q</div>
+         <div class="button">r</div>
+         <div class="button">s</div>
+         <div class="button">t</div>
+         <div class="button">u</div>
+         <div class="button">v</div>
+         <div class="button">w</div>
+         <div class="button">x</div>
+         <div class="button">y</div>
+         <div class="button">z</div>
+         <div class="button">0</div>
+         <div class="button">1</div>
+         <div class="button">2</div>
+         <div class="button">3</div>
+         <div class="button">4</div>
+         <div class="button">5</div>
+         <div class="button">6</div>
+         <div class="button">7</div>
+         <div class="button">8</div>
+         <div class="button">9</div>
+         <div id="space" class="button">space</div>
+         <div id="clear" class="button">clear</div>
+        </div>
+        </div><!-- end #keyboard -->
+
 </div>
-<script type="text/javascript" src="js/index.js"></script>
+<script class="text/javascript" src="js/index.js"></script>
 </body>
 </html>
