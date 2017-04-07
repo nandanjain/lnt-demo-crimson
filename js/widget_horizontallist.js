@@ -8,7 +8,7 @@ CRIMSON.HorizontalMenu = function (parent) {
     var CURRENT_INDEX = 0;
     var TOTAL_SIZE = 0;
     var BLOCK_KEY = false;
-
+    var posterArray = [];
     var computedStyle = getComputedStyle(parent, null);
     var baseLeft = parseInt(computedStyle.left);
     var baseTop = parseInt(computedStyle.top);
@@ -27,6 +27,7 @@ CRIMSON.HorizontalMenu = function (parent) {
                         break;
                     case "left":
                         BLOCK_KEY = false;
+                        posterArray[CURRENT_INDEX].focus();
                         break;
                 }
                 break;
@@ -34,13 +35,17 @@ CRIMSON.HorizontalMenu = function (parent) {
     }
 
     this.setData = function (data) {
+        posterArray = [];
         for (var i = 0; i < data.length; i++) {
             var posterData = data[i];
-            var posterContainer = new PosterCard(posterData).getContainerEle();
+            var posterCard = new PosterCard(posterData);
+            var posterContainer = posterCard.getContainerEle();
             posterContainer.style.left = i * POSTER_WIDTH;
             parent.appendChild(posterContainer);
+            posterArray.push(posterCard);
             TOTAL_SIZE++;
         }
+        posterArray[CURRENT_INDEX].focus();
         parent.style.width = (TOTAL_SIZE + 2) * POSTER_WIDTH + "px";
     };
 
@@ -48,6 +53,7 @@ CRIMSON.HorizontalMenu = function (parent) {
         if (CURRENT_INDEX == 0 || BLOCK_KEY) {
             return false;
         }
+        posterArray[CURRENT_INDEX].blur();
         CURRENT_INDEX--;
         BLOCK_KEY = true;
         parent.style.left = (baseLeft - CURRENT_INDEX * POSTER_WIDTH) + "px";
@@ -57,6 +63,7 @@ CRIMSON.HorizontalMenu = function (parent) {
         if (CURRENT_INDEX == TOTAL_SIZE || BLOCK_KEY) {
             return false;
         }
+        posterArray[CURRENT_INDEX].blur();
         BLOCK_KEY = true;
         CURRENT_INDEX++;
         parent.style.left = (baseLeft - CURRENT_INDEX * POSTER_WIDTH) + "px";
@@ -91,6 +98,11 @@ CRIMSON.HorizontalMenu = function (parent) {
         return BLOCK_KEY;
     };
 
+    this.select = function () {
+        var selectedPoster = posterArray[CURRENT_INDEX];
+        return selectedPoster.getPlaySessionLink();
+    };
+
     function PosterCard(data) {
         var basePoster = document.createElement("div");
         basePoster.className = "poster-card";
@@ -102,7 +114,16 @@ CRIMSON.HorizontalMenu = function (parent) {
         var logo = document.createElement("img");
         logo.className = "poster-logo";
         // TODO:
-        logo.src = data.url;
+        if (data && data.content) {
+            for (var i = 0; i < data.content.media.length; i++) {
+                var logoObj = data.content.media[i];
+                if (logoObj.height < logoObj.width) {
+                    logo.src = logoObj.url;
+                }
+            }
+        } else {
+            logo.src = data.url;
+        }
 
         basePoster.appendChild(title);
         basePoster.appendChild(logo);
@@ -112,6 +133,15 @@ CRIMSON.HorizontalMenu = function (parent) {
         };
         this.setPosterImg = function (url) {
             logo.src = url;
+        };
+        this.getPlaySessionLink = function () {
+            return data.id;
+        };
+        this.focus = function () {
+            CRIMSON.addClass(basePoster, "selected");
+        };
+        this.blur = function () {
+            CRIMSON.removeClass(basePoster, "selected");
         };
         this.getContainerEle = function () {
             return basePoster;

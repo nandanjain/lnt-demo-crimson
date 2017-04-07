@@ -41,7 +41,7 @@ div#home {
 div.vertical_menu {
     position: absolute;
     top: 270px;
-    left: 120px;
+    left: 225px;
     /*border: 1px solid crimson;*/
     -webkit-transition: top ease-in 800ms;
 }
@@ -93,7 +93,11 @@ div.fullscreen {
     height: 112px;
     width: 175px;
     margin: 10px;
-    /*border: 1px solid red;*/
+    border-top: 5px solid transparent;
+}
+
+.poster-card.selected {
+    border-color: crimson;
 }
 
 .horizontal_menu {
@@ -107,29 +111,33 @@ div.fullscreen {
 .horizontal_menu_item {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 180px;
     /*visibility: hidden;*/
     opacity: 0;
     -webkit-transition: left ease-in-out 500ms, top ease-out 500ms, opacity linear 510ms;
 }
 
-.horizontal_menu_item.selected {
+.selected .poster-title {
+    visibility: visible;
+    background: red;
+    text-align: center;
     /*-webkit-transition: none;*/
 }
 
 img.poster-logo {
-    position: absolute;
-    top: 10px;
-    height: 112px;
+    /*position: absolute;*/
+    /*top: 10px;*/
+    /*height: 112px;*/
     width: 175px;
     /*border: 1px dashed green;*/
 }
 
 .poster-title {
+    visibility: hidden;
     position: absolute;
     bottom: 17px;
     z-index: 1;
-    background: red;
+    background: rgba(0, 0, 0, .5);
     width: 175px;
-    font-size: 30px;
+    font-size: 20px;
 }

@@ -1,6 +1,8 @@
 /**
  * Created by nanjain on 3/31/17.
  */
+var CRIMSON = CRIMSON || {};
+
 CRIMSON.KEYS = {
     LEFT: 37,
     UP: 38,
@@ -8,6 +10,13 @@ CRIMSON.KEYS = {
     DOWN: 40,
     EXIT: 27,
     OK: 13
+};
+
+CRIMSON.fetchData = function () {
+    CRIMSON.DataLayer.fetchVOD(function (vodData) {
+        horizontalData[2] = vodData.content;
+        CRIMSON.initialize();
+    });
 };
 
 CRIMSON.initialize = function () {
@@ -42,7 +51,6 @@ CRIMSON.initialize = function () {
                     return;
                 }
                 horizontalMenuArray[CURRENT_ITEM].moveUp();
-//                horizontalMenuArray[CURRENT_ITEM].hide();
                 CURRENT_ITEM--;
                 homeVerticalMenu.moveDown();
                 horizontalMenuArray[CURRENT_ITEM].show();
@@ -57,14 +65,24 @@ CRIMSON.initialize = function () {
                     return;
                 }
                 horizontalMenuArray[CURRENT_ITEM].moveDown();
-//                horizontalMenuArray[CURRENT_ITEM].hide();
                 CURRENT_ITEM++;
                 homeVerticalMenu.moveUp();
-//                horizontalMenuArray[CURRENT_ITEM].moveDown();
                 horizontalMenuArray[CURRENT_ITEM].show();
                 break;
+            case CRIMSON.KEYS.OK:
+                var itemId = horizontalMenuArray[CURRENT_ITEM].select();
+                if (CURRENT_ITEM == 2) {
+                    CRIMSON.DataLayer.fetchVODItemPlaybackURL(itemId, function (jsonObj) {
+                        document.getElementById("title").innerText = jsonObj._links.playUrl.href;
+                        document.getElementsByTagName("video")[0].src = jsonObj._links.playUrl.href;
+                    });
+                } else {
+                    alert("Selected");
+                }
+                break;
         }
-    }
+    };
+    document.getElementsByTagName("video")[0].play();
 };
 
 CRIMSON.hasClass = function (ele, className) {
