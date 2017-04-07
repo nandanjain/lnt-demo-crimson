@@ -23,6 +23,8 @@ CRIMSON.HorizontalMenu = function (parent) {
             case 'webkitTransitionEnd':
                 switch (event.propertyName) {
                     case "top":
+                        BLOCK_KEY = false;
+                        posterArray[CURRENT_INDEX].blur();
                         that.hide();
                         break;
                     case "left":
@@ -70,16 +72,21 @@ CRIMSON.HorizontalMenu = function (parent) {
     };
 
     this.moveUp = function () {
+        if (BLOCK_KEY) return;
+        BLOCK_KEY = true;
         parent.style.opacity = 0;
         parent.style.top = baseTop + POSTER_HEIGHT + "px";
     };
 
     this.moveDown = function () {
+        if (BLOCK_KEY) return;
+        BLOCK_KEY = true;
         parent.style.opacity = 0;
         parent.style.top = baseTop - POSTER_HEIGHT + "px";
     };
 
     this.show = function () {
+        posterArray[CURRENT_INDEX].focus();
         parent.style.opacity = 1;
     };
 
@@ -114,16 +121,7 @@ CRIMSON.HorizontalMenu = function (parent) {
         var logo = document.createElement("img");
         logo.className = "poster-logo";
         // TODO:
-        if (data && data.content) {
-            for (var i = 0; i < data.content.media.length; i++) {
-                var logoObj = data.content.media[i];
-                if (logoObj.height < logoObj.width) {
-                    logo.src = logoObj.url;
-                }
-            }
-        } else {
-            logo.src = data.url;
-        }
+        logo.src = data.poster;
 
         basePoster.appendChild(title);
         basePoster.appendChild(logo);

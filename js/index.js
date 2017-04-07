@@ -14,8 +14,11 @@ CRIMSON.KEYS = {
 
 CRIMSON.fetchData = function () {
     CRIMSON.DataLayer.fetchVOD(function (vodData) {
-        horizontalData[2] = vodData.content;
-        CRIMSON.initialize();
+        horizontalData[2] = CRIMSON.DATA.VOD_LIST;
+        CRIMSON.DataLayer.fetchChannels(function (whatsOn) {
+            horizontalData[1] = CRIMSON.DATA.WHATS_ON;
+            CRIMSON.initialize();
+        });
     });
 };
 
@@ -48,6 +51,12 @@ CRIMSON.initialize = function () {
             case CRIMSON.KEYS.UP:
                 // UP
                 if (CURRENT_ITEM == 0) {
+                    CRIMSON.DataLayer.fetchSearch("a", function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            var dataa = data[i];
+                            console.log("Search Results : " + dataa.title);
+                        }
+                    });
                     return;
                 }
                 horizontalMenuArray[CURRENT_ITEM].moveUp();
