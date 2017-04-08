@@ -161,7 +161,7 @@ CRIMSON.DataLayer = new function () {
     };
 
     this.fetchSearch = function (keyword, callback) {
-        if (SEARCH_REQ && SEARCH_REQ.readyState != 4) {
+        if (SEARCH_REQ && SEARCH_REQ.readyState !== 4) {
             SEARCH_REQ.abort();
             SEARCH_REQ = null;
         }
@@ -184,22 +184,37 @@ CRIMSON.DataLayer = new function () {
             var results = [];
             for (var i = 0; i < data.content.length; i++) {
                 var content = data.content[i];
-                var currentProgram = content.content;
-                var channel = content.channel;
-                //TODO: Handle different types of results
-                results.push({
-                    type: "search",
-                    id: currentProgram.id,
-                    poster: currentProgram.media[0].url,
-                    title: currentProgram.title,
-                    startDateTime: currentProgram.startDateTime,
-                    duration: currentProgram.duration,
-                    channel_logo: channel.media[0].url,
-                    channel_name: channel.name,
-                    channel_number: channel.logicalChannelNumber,
-                    playbackURL: tuningParams[i],
-                    object: content
-                });
+                if (content.type == "event") {
+                    var currentProgram = content.content;
+                    var channel = content.channel;
+                    //TODO: Handle different types of results
+                    results.push({
+                        type: "search_event",
+                        id: currentProgram.id,
+                        poster: currentProgram.media[0].url,
+                        title: currentProgram.title,
+                        startDateTime: currentProgram.startDateTime,
+                        duration: currentProgram.duration,
+                        channel_logo: channel.media[0].url,
+                        channel_name: channel.name,
+                        channel_number: channel.logicalChannelNumber,
+                        playbackURL: tuningParams[i],
+                        object: content
+                    });
+                } else if (content.type == "show") {
+                    var currentProgram = content;
+                    //TODO: Handle different types of results
+                    results.push({
+                        type: "search_show",
+                        id: currentProgram.id,
+                        poster: currentProgram.media[0].url,
+                        title: currentProgram.title,
+                        duration: currentProgram.duration,
+                        playbackURL: tuningParams[i],
+                        object: content
+                    });
+
+                }
             }
             return results;
         }
