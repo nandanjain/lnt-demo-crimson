@@ -67,7 +67,7 @@ CRIMSON.DataLayer = new function () {
                 allChannels.push({
                     type: "channel",
                     id: channel.id,
-                    name: channel.name,
+                    title: channel.name,
                     number: channel.logicalChannelNumber,
                     logo: channel.media[0].url,
                     object: channel
@@ -221,26 +221,6 @@ CRIMSON.DataLayer = new function () {
                 alert(data + " : " + errorThrown + " : " + status);
             }
         });
-
-//        var xhr = new XMLHttpRequest();
-//        xhr.withCredentials = true;
-//
-//        xhr.addEventListener("readystatechange", function () {
-//            if (this.readyState === 4 && this.status == 200) {
-//                console.log(this.responseText);
-//                if (typeof callback == 'function') {
-//                    callback(eval('(' + this.responseText + ')'))
-//                }
-//            }
-//        });
-//
-//        xhr.open("GET", url, true);
-//        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-////        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-//        xhr.setRequestHeader("cache-control", "no-cache");
-//        xhr.setRequestHeader("Authorization", TOKEN);
-//
-//        xhr.send();
     }
 
     function doPOST(url, params, callback) {
@@ -265,39 +245,5 @@ CRIMSON.DataLayer = new function () {
                 alert(data + " : " + errorThrown + " : " + status);
             }
         });
-//        } else {
-//            $.ajax({
-//                type: 'POST',
-//                crossOrigin: true,
-//                url: url,
-//                dataType: "json",
-//                cache: false,
-//                data: params,
-//                success: function (data) {
-//                    callback(data);
-//                },
-//                error: function (data, errorThrown, status) {
-//                    alert(data + " : " + errorThrown + " : " + status);
-//                }
-//            });
-//        }
-//        var xhr = new XMLHttpRequest();
-//        xhr.withCredentials = true;
-//
-//        xhr.addEventListener("readystatechange", function () {
-//            if (this.readyState === 4 && this.status == 200) {
-//                console.log(this.responseText);
-//                if (typeof callback == 'function') {
-//                    callback(eval('(' + this.responseText + ')'))
-//                }
-//            }
-//        });
-//        xhr.open("POST", url, true);
-//        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-//        xhr.setRequestHeader("cache-control", "no-cache");
-//        xhr.setRequestHeader("Accept", "application/json");
-//        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-//        xhr.setRequestHeader("Origin", "http://evil.com/");
-//        xhr.send(params);
     }
 };

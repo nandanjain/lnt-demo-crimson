@@ -1,16 +1,25 @@
 /**
  * Created by nanjain on 3/31/17.
  */
-CRIMSON.VerticalMenu = function (parent) {
+CRIMSON.VerticalMenu = function (parent, data) {
     var VERTICAL_MOVE = 70;
     var TOTAL_SIZE = 4;
     var CURRENT_INDEX = 2;
-    var baseTop = parseInt(getComputedStyle(parent, null).top);
     var items = parent.getElementsByClassName("vertical_menu_item");
     var BLOCK_KEY = false;
+    var baseTop = 0;
+    var baseEle = document.createElement("div");
+    baseEle.className = "vertical_menu_item";
 
     this.setData = function (data) {
-
+        for (var i = 0; i < data.length; i++) {
+            var ele = baseEle.cloneNode(true);
+            CRIMSON.addClass(ele, "item_" + i);
+            ele.innerHTML = data[i].title;
+            parent.appendChild(ele);
+        }
+        baseTop = parseInt(getComputedStyle(parent, null).top);
+        this.updatePosition();
     };
     var that = this;
     parent.addEventListener("webkitTransitionEnd", webkitEvent, false);
@@ -54,6 +63,4 @@ CRIMSON.VerticalMenu = function (parent) {
         parent.style.top = (baseTop - CURRENT_INDEX * VERTICAL_MOVE) + "px";
         CRIMSON.addClass(items[CURRENT_INDEX], "selected");
     };
-
-    this.updatePosition();
 };
