@@ -16,6 +16,7 @@ var homeVerticalData = [
     {title: "library"},
     {title: "settings"},
 ];
+
 var horizontalData = [];
 horizontalData.push(
     [
